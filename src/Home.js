@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CalendarComp from "./CalendarComp";
-// import DateRangeComp from "./DateRangeComponet";
-// import { DateRangePicker } from "react-date-range";
 import DateRangePickerComp from "./DateRangePickerComp";
-import PDFGenerator from "./PDFGenerator";
 import Excel from "./Excel";
+import Search from "./Search";
 
 function Home() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   <CalendarComp />;
   useEffect(() => {
     fetch("http://localhost:8080/home")
@@ -17,8 +21,6 @@ function Home() {
       .then((result) => setData(result))
       .catch((err) => console.log(err));
   }, []);
-  // console.log(res);
-  // setData(data);
 
   return (
     <div className="home">
@@ -29,11 +31,18 @@ function Home() {
           </button>
         </div>
         <div className="bttn2">
-          <Excel data={data}/>
+          <Excel data={data} />
           {/* <PDFGenerator data={data} /> */}
-          <Excel/>
-          {console.log(data)}
+          {/* {console.log(data)} */}
         </div>
+        {/* <Search data={data}/> */}
+        <input
+          className="search"
+          placeholder="Search"
+          onChange={handleChange}
+        ></input>
+
+        {/* <button className="bt" onClick={handleClick} >Search</button> */}
       </div>
       <div>
         <DateRangePickerComp />
@@ -51,20 +60,26 @@ function Home() {
             </tr>
           </thead>
 
-          {data ? <GetData data={data} /> : <h2>Loading</h2>}
+          {data ? <GetData data={data} search={search}/> : <h2>Loading</h2>}
         </table>
       </div>
     </div>
   );
 }
 
-const GetData = ({ data }) => {
-  console.log(data);
+const GetData = ({ data, search }) => {
+  // console.log(data);
   return (
     <tbody>
-      {data.map((key, index) => (
-        <Data data={key} key={index} />
-      ))}
+      {data
+        .filter((item) => {
+          return search.toLowerCase() === ""
+            ? item
+            : item.employeename.toLowerCase().includes(search);
+        })
+        .map((key, index) => (
+          <Data data={key} key={index} />
+        ))}
     </tbody>
   );
 };

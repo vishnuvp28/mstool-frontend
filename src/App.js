@@ -6,6 +6,7 @@ import Register from "./Register";
 import Login from "./Login";
 import Home from "./Home";
 import DateRangePickerComp from "./DateRangePickerComp";
+import Footer from "./Footer";
 function App() {
   return (
     <div className="App">
@@ -17,7 +18,9 @@ function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path="/date" element={<DateRangePickerComp/>}/>
 
+
       </Routes>
+      {/* <Footer/> */}
     </div>
   );
 }

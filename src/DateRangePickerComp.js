@@ -23,7 +23,7 @@ function DateRangePickerComp() {
   }, []);
 
   const hideOnEscape = (e) => {
-    console.log(e.key);
+    // console.log(e.key);
     if (e.key === "Escape") {
       setOpen(false);
     }

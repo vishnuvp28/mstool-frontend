@@ -4,7 +4,7 @@ import Home from "./Home";
 
 
 function Excel({data}) {
-  console.log(data)
+  // console.log(data)
   if(!data){
     console.error("Data is undefined");
     return;

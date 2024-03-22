@@ -4,8 +4,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router";
 
 const formValidationSchema = yup.object({
-  userName: yup.string().required(),
-  password: yup.string().required().min(8),
+  username: yup.string().required(),
+  password: yup.string().required(),
 });
 
 function Login() {
@@ -21,7 +21,7 @@ function Login() {
         const data = await fetch("http://localhost:8080/", {
           method: "POST",
           headers: {
-            " Content-type": "application/json",
+            "Content-type": "application/json",
           },
           body: JSON.stringify(values),
         });
@@ -33,6 +33,7 @@ function Login() {
           setFormState("success");
           alert("LoginSuccessful");
           navigate("/home");
+          console.log("success")
         }
       },
     });

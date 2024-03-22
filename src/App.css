@@ -12,7 +12,10 @@ body {
       rgba(0, 0, 0, 0.2) 50%,
       rgba(0, 0, 0, 0.2) 50%
     ),
-    url(https://as1.ftcdn.net/v2/jpg/07/10/39/04/1000_F_710390477_7hah8IKLt3FeUp7Q1VYS3wJJdK9aKozP.jpg);
+    url(https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D );
+    /* https://www.hindustantimes.com/ht-img/img/2024/01/24/1600x900/smart_door_lock_1706086441433_1706086456668.jpg */
+    /* https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D */
+    /* https://as1.ftcdn.net/v2/jpg/07/10/39/04/1000_F_710390477_7hah8IKLt3FeUp7Q1VYS3wJJdK9aKozP.jpg */
   /* height: 109vh; */
   background-size: cover;
   background-position: center;
@@ -284,4 +287,12 @@ align-items:center ;
   padding:20px;
   font-size:large;
   justify-content: center;
+}
+
+/* navbar icon ----------------------------------- */
+
+
+
+.i{
+  height:50px;
 }

@@ -8,8 +8,8 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 function DateRangePickerComp() {
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      sdate: new Date(),
+      edate: addDays(new Date(), 7),
       key: "selection",
     },
   ]);
@@ -37,11 +37,11 @@ function DateRangePickerComp() {
     }
   };
 
-  const sendDateRangeToBackend = async () => {
+  const sedateRangeToBackend = async () => {
     try {
       const response = await axios.post("http://localhost:8080/date", {
-        startDate: range[0].startDate,
-        endDate: range[0].endDate,
+        sdate: range[0].sdate,
+        edate: range[0].edate,
       });
 
       console.log("Server response:", response.data);
@@ -52,7 +52,7 @@ function DateRangePickerComp() {
 
   const handleDateRangeChange = (item) => {
     setRange([item.selection]);
-    sendDateRangeToBackend(); // Send date range to the backend when it changes
+    sedateRangeToBackend(); // Send date range to the backend when it changes
   };
 
 
@@ -60,8 +60,8 @@ function DateRangePickerComp() {
     <div className="calenderwrap">
          <h3 className="h3">MM/DD/YYYY :</h3>
       <input
-        value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
-          range[0].endDate,
+        value={`${format(range[0].sdate, "MM/dd/yyyy")} to ${format(
+          range[0].edate,
           "MM/dd/yyyy"
         )}`}
         readOnly

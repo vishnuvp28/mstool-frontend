@@ -25,7 +25,7 @@ function Login() {
           },
           body: JSON.stringify(values),
         });
-        if (data.status === 401) {
+        if (data.status==="failed login") {
           console.log("error");
           setFormState("error");
           alert("Invalid credentials");

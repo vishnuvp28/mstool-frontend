@@ -6,7 +6,9 @@ import Register from "./Register";
 import Login from "./Login";
 import Home from "./Home";
 import DateRangePickerComp from "./DateRangePickerComp";
-import Footer from "./Footer";
+import Employee from "./Employee";
+import Adduser from "./Adduser";
+import EditUser from "./Edituser";
 function App() {
   return (
     <div className="App">
@@ -17,7 +19,10 @@ function App() {
         <Route path="/signup" element={<Register/>} />
         <Route path="/home" element={<Home/>}/>
         <Route path="/date" element={<DateRangePickerComp/>}/>
-
+        <Route path="/edit/:id" element={<EditUser/>}/>
+        <Route path="/delete/:id" element={<Employee/>}/>
+        <Route path="/add" element={<Adduser/>}/>
+        <Route path="/employee" element={<Employee/>}/>
 
       </Routes>
       {/* <Footer/> */}

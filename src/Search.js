@@ -14,7 +14,7 @@ function Search({data}) {
   const filterData = (searchValue) => {
     const filteredList = (data || []).filter((item) =>
       Object.values(item).some((value) =>
-        value.toString().toLowerCase().includes(searchValue.toLowerCase())
+      value && value.toString().toLowerCase().includes(searchValue.toLowerCase())
       )
     );
     setFilteredData(filteredList);

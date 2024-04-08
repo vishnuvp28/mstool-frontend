@@ -4,34 +4,24 @@
 }
 
 body {
-  /* display: flex; */
-  /* align-items: center; */
   justify-content: center;
   background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.2) 50%,
       rgba(0, 0, 0, 0.2) 50%
     ),
-    url(https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D );
-    /* https://www.hindustantimes.com/ht-img/img/2024/01/24/1600x900/smart_door_lock_1706086441433_1706086456668.jpg */
-    /* https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D */
-    /* https://as1.ftcdn.net/v2/jpg/07/10/39/04/1000_F_710390477_7hah8IKLt3FeUp7Q1VYS3wJJdK9aKozP.jpg */
-  /* height: 109vh; */
+    url(https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+ 
   background-size: cover;
   background-position: center;
-  /* color: antiquewhite; */
 }
-
 
 .img {
   object-fit: cover;
   width: 50%;
   height: 70vh;
   border-radius: 30px 0px 0px 30px;
-  /* border:2px solid black; */
 }
-
-
 
 .image {
   object-fit: cover;
@@ -43,85 +33,802 @@ body {
   width: 109vh;
 }
 .textfield {
-  padding: 20px;
+  padding: 10px;
   width: 450px;
-  font-size: large;
+  font-size: small;
   border-radius: 20px;
   border: none;
   background: transparent;
-  font-display:initial;
+  font-display: initial;
   color: rgb(1, 1, 1);
   text-decoration-color: aliceblue;
   border: 2px solid rgb(255, 255, 255);
-font-size:x-large;
-font-display:unset;
+  font-size: x-large;
+  font-display: unset;
 }
 
-::placeholder{
+::placeholder {
   color: aliceblue;
 }
 
-.search{
-  padding: 20px;
+@media screen and (max-width: 1240px) {
+  .textfield {
+    padding: 10px;
+    width: 350px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+
+  .butn {
+    padding: 5px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 250px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 10px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 5px;
+    background: transparent;
+    border: 2px solid white;
+    width: 25rem;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  .textfield {
+    padding: 10px;
+    width: 300px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 10px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 20px;
+    margin: 5px;
+    background: transparent;
+    border: 2px solid white;
+    width: 240px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 10px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 5px;
+    background: transparent;
+    border: 2px solid white;
+    width: 250px;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .textfield {
+    padding: 10px;
+    width: 250px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 210px;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .textfield {
+    padding: 10px;
+    width: 200px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 100px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 110px;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .textfield {
+    padding: 10px;
+    width: 60px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 24rem;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 25rem;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 378px) {
+  .textfield {
+    padding: 10px;
+    width: 90px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 24rem;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 25rem;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 210px) {
+  .textfield {
+    padding: 10px;
+    width: 40px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 24rem;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 25rem;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .textfield {
+    padding: 10px;
+    width: 100px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 80px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 90px;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+@media screen and (max-width: 478px) {
+  .textfield {
+    padding: 10px;
+    width: 150px;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-display: initial;
+    color: rgb(1, 1, 1);
+    text-decoration-color: aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: x-large;
+    font-display: unset;
+  }
+
+  ::placeholder {
+    color: aliceblue;
+  }
+  .bttn1 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+  .bttn2 {
+    display: flex;
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 20px;
+    background: transparent;
+    width: 200px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: 2px solid rgb(238, 235, 235);
+    justify-content: center;
+  }
+
+  .butn {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 24rem;
+    color: rgb(255, 255, 255);
+    font-size: large;
+  }
+
+  .butn:hover {
+    padding: 20px;
+    text-decoration: rgb(255, 255, 255);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 20px;
+    background: transparent;
+    border: 2px solid white;
+    width: 25rem;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+  }
+
+  .bt {
+    padding: 25px;
+    border-radius: 20px;
+  }
+}
+
+.search {
+  padding: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
+
   width: 350px;
   font-size: large;
   border-radius: 20px;
   border: none;
   background: transparent;
-  font-display:initial;
+  font-display: initial;
   color: rgb(1, 1, 1);
   text-decoration-color: aliceblue;
   border: 2px solid rgb(255, 255, 255);
-font-size:x-large;
-font-display:unset;
+  font-display: unset;
 }
 
-
 .table {
-  width: 600px;
+  width: 100%;
   background-color: aliceblue;
+  border-collapse: collapse;
+  align-items: center;
 }
 
 .tr {
   display: flex;
   justify-content: space-evenly;
-  padding: 10px;
-  margin: 10px;
-  /* border:0.1px solid rgb(208, 13, 13); */
-  align-items: flex-start;
+  padding: 5px;
+  margin: 5px;
+  align-items: center;
+  width: 1200px;
 }
 
 .homediv {
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* justify-content: flex-start; */
+  flex-direction: row;
+  justify-content: flex-end;
+  justify-content: flex-end;
+/* border:2px solid red; */
+  width: auto;
+  height: auto;
+  margin-top: 0px;
 }
 
+.homediv .excel {
+  margin-right: 20px;
+  margin-top: 10px;
+}
 
+.homediv .logout {
+  margin-right: 10px;
+  margin-top: 10px;
+}
 
-.container1 {
-  /* background-color: rgb(241, 244, 252); */
+.container {
   justify-content: space-around;
+  display: flex;
+  align-items: center;
 }
+
 
 .th {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 /* Button --------------------------------*/
 .bttn1 {
   display: flex;
-  padding: 20px;
+  padding: 5px;
   text-decoration: rgb(255, 255, 255);
   font-weight: bolder;
   border-radius: 15px;
   margin: 20px;
   background: transparent;
   border: 2px solid white;
-  width: 200px;
+  width: 100px;
   color: rgb(255, 255, 255);
   font-size: large;
   border: 2px solid rgb(238, 235, 235);
@@ -129,13 +836,12 @@ font-display:unset;
 }
 .bttn2 {
   display: flex;
-  padding: 20px;
+  padding: 5px;
   text-decoration: rgb(255, 255, 255);
   font-weight: bolder;
   border-radius: 15px;
   margin: 20px;
   background: transparent;
-  /* border: 2px solid white; */
   width: 200px;
   color: rgb(255, 255, 255);
   font-size: large;
@@ -144,39 +850,35 @@ font-display:unset;
 }
 
 .butn {
-  padding: 20px;
+  padding: 5px;
   text-decoration: rgb(255, 255, 255);
-  font-weight: bolder;
+  font-weight: bold;
   border-radius: 20px;
-  margin: 20px;
+  margin: 5px;
   background: transparent;
   border: 2px solid white;
-  width: 24rem;
+  width: 420px;
   color: rgb(255, 255, 255);
   font-size: large;
 }
 
 .butn:hover {
-  padding: 20px;
+  padding: 5px;
   text-decoration: rgb(255, 255, 255);
   font-weight: bolder;
   border-radius: 20px;
-  margin: 20px;
+  margin: 5px;
   background: transparent;
   border: 2px solid white;
-  width: 25rem;
+  width: 425px;
   color: rgb(255, 255, 255);
   font-size: larger;
 }
 
-.bt{
-  padding:25px;
+.bt {
+  padding: 25px;
   border-radius: 20px;
-
-
 }
-
-
 
 /* h1 ------------------------------------------- */
 .home h1 {
@@ -194,7 +896,6 @@ font-display:unset;
 }
 .reg .h1 {
   color: rgb(255, 255, 255);
-  margin-bottom: 100px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-style: inherit;
@@ -207,7 +908,6 @@ font-display:unset;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 2px solid rgb(240, 21, 21); */
   flex-direction: row;
   height: 90vh;
   /* color: antiquewhite; */
@@ -217,7 +917,6 @@ font-display:unset;
   border: none;
   display: flex;
   flex-direction: column;
-  /* border-radius: 0px 30px 30px 0px; */
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -229,15 +928,12 @@ font-display:unset;
 
 .regi {
   margin-top: 20px;
-  /* border: 2px solid rgb(240, 21, 21); */
   display: flex;
   width: 50%;
   padding-bottom: 30px;
   border-radius: 30px;
   box-shadow: -5px -5px 18px #000000, 15px 15px 18px rgba(0, 0, 0, 0.3);
   background: transparent;
-  /* color: antiquewhite; */
-  /* background-color: rgb(241, 244, 252); */
 }
 
 /* DatePicker------------------------------------ */
@@ -262,37 +958,161 @@ font-display:unset;
   border: 1px solid rgb(232, 228, 228);
   z-index: 999;
 }
-.calenderwrap h3 {
+.calenderwrap h5 {
   color: rgb(255, 255, 255);
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-style: inherit;
-  font-weight: bolder;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
+  font-weight: bold;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.footer{
+.footer {
   border: 2px solid black;
   height: 100px;
   background-color: black;
   color: rgb(94, 93, 92);
   margin-bottom: 10px;
-align-items:center ;
+  align-items: center;
 }
 
-.footer h6{
+.footer h6 {
   display: flex;
-  padding:20px;
-  font-size:large;
+  padding: 20px;
+  font-size: large;
   justify-content: center;
 }
 
 /* navbar icon ----------------------------------- */
 
+.i {
+  height: 50px;
+}
 
+.Addbtn {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgb(83, 181, 246);
+  width: 60px;
+}
 
-.i{
-  height:50px;
+.Addbtn:hover {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgb(16, 159, 255);
+  width: 60px;
+}
+.Editbtn {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgba(7, 104, 7, 0.763);
+  width: 60px;
+}
+.Editbtn:hover {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgba(56, 163, 56, 0.763);
+  width: 60px;
+}
+.Delbtn {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgb(213, 16, 16);
+  width: 60px;
+}
+.Delbtn:hover {
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgb(196, 28, 28);
+
+  width: 60px;
+}
+
+.emp {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 40px;
+}
+.em {
+  padding: 5px;
+  background: white;
+  border: 1 px solid white;
+  border-radius: 5px;
+  width: 120px;
+  font-size: medium;
+}
+
+.em:hover {
+  background: rgb(209, 209, 209);
+}
+
+.add {
+  padding: 5px;
+  width: 120px;
+  margin-right: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+ background-color: rgb(164, 249, 46);
+}
+.subdiv-addi h1 {
+  color: aliceblue;
+}
+
+/* Add User------------------------------------------- */
+
+.addi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 90vh;
+}
+
+.maindiv-addi {
+  margin-top: 20px;
+  display: flex;
+  width: 50%;
+  padding-bottom: 30px;
+  border-radius: 30px;
+  box-shadow: -5px -5px 18px #000000, 15px 15px 18px rgba(0, 0, 0, 0.3);
+  background: transparent;
+}
+
+.subdiv-addi {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+  width: 100%;
+  height: 70vh;
+  background: transparent;
+}
+
+.addbtn {
+  padding: 5px;
+  text-decoration: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 20px;
+  margin: 20px;
+  background: transparent;
+  border: 2px solid white;
+  width: 250px;
+  color: rgb(255, 255, 255);
+  font-size: large;
+}
+.addbtn:hover {
+  width: 252px;
+  padding: 5px;
+  /* background-color:  rgb(255, 255, 255);
+  color: #000000; */
 }

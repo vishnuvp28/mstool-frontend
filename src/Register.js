@@ -7,7 +7,7 @@ import * as yup from "yup";
 const formValidationSchema = yup.object({
   username: yup.string().required(),
   email: yup.string().required().email(),
-  password: yup.string().required().min(8),
+  password: yup.string().required(),
 });
 
 function Register() {

@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router";
 
 const formValidationSchema = yup.object({
-  id: yup.string().required(),
+  employeeid: yup.string().required(),
   employeename: yup.string().required(),
   cabinetname: yup.string().required(),
 
@@ -16,7 +16,7 @@ function Adduser() {
 
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
     useFormik({
-      initialValues: {  id:"", employeename: "",cabinetname:"" },
+      initialValues: {  employeeid:"", employeename: "",cabinetname:"" },
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
         console.log(values);
@@ -49,7 +49,7 @@ function Adduser() {
 <br></br>
 
         <form onSubmit={handleSubmit} className="login-form">
-            <input
+            {/* <input
               className="textfield"
               placeholder="Id"
               type="number"
@@ -61,7 +61,7 @@ function Adduser() {
               autoComplete="id"
             />
             <br></br>
-            <br></br>
+            <br></br> */}
             <input
               className="textfield"
               placeholder="EmployeeId"

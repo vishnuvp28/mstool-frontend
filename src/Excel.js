@@ -19,7 +19,7 @@ function Excel({data}) {
   };
   return (
     <div>
-      <button onClick={exportToExcel}>Export to Excel</button>
+      <button className="exp" onClick={exportToExcel}>Export to Excel</button>
     </div>
   );
 }

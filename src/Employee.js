@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import CalendarComp from "./CalendarComp";
-import DateRangePickerComp from "./DateRangePickerComp";
-import Excel from "./Excel";
-import Search from "./Search";
+
 
 function Employee() {
   const navigate = useNavigate();
@@ -12,29 +9,27 @@ function Employee() {
   const [emp, setEmp] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState(null);
+
+  const totalRecords = emp.length;
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = emp.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(emp.length / recordsPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1);
+  const [recordsPerPage] = useState(11);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = emp.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  // // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  function prePage() {
-    if (currentPage !== firstIndex) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
-  function nextPage() {
-    setCurrentPage(id);
-  }
-  function ChangeCPage(id) {
-    if (currentPage !== lastIndex) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
 
   useEffect(() => {
     fetch("http://localhost:8080/employee")
@@ -52,6 +47,8 @@ function Employee() {
       .catch((err) => console.log(err));
   }, []);
   console.log(filteredData);
+
+
   return (
     <div className="home">
       <div>
@@ -72,7 +69,7 @@ function Employee() {
             Back
           </button>
         </div>
-        <h1>User details</h1>
+        <h1>Employee</h1>
       </div>
       <br></br>
       <div className="container">
@@ -88,43 +85,56 @@ function Employee() {
           </thead>
 
           {Array.isArray(emp) ? (
-            <GetData records={emp} search={search} />
+            <GetData records={currentRecords} search={search} />
           ) : (
             <h2>Loading</h2>
           )}
         </table>
       </div>
-      <nav>
-        <ul className="pagination">
-          <li className="page-item">
-            <a href="#" className="page-link" onClick={prePage}>
-              Prev
-            </a>
-          </li>
-          {numbers.map((n, i) => (
-            <li
-              className={`page-item ${currentPage === n ? "active" : ""}`}
-              key={i}
-            >
-              <a href="#" className="page-item" onClick={ChangeCPage}>
-                {n}
-              </a>
+      <br></br>
+
+      <div className="nav">
+        <nav>
+          <ul className="pagination">
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={prevPage}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
             </li>
-          ))}
-          <li className="page-item">
-            {" "}
-            <a href="#" className="page-link" onClick={nextPage}>
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
+            {pageNumbers.map((number) => (
+              <li key={number} className="page-item">
+                <button onClick={() => paginate(number)} className="page-link">
+                  {number}
+                </button>
+              </li>
+            ))}
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={nextPage}
+                disabled={
+                  currentPage === Math.ceil(totalRecords / recordsPerPage)
+                }
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }
 
 const GetData = ({ records, search }) => {
   console.log(records);
+
+  // Change page
+
   return (
     <tbody>
       {records
@@ -139,27 +149,7 @@ const GetData = ({ records, search }) => {
     </tbody>
   );
 };
-const handleDelete = (id) => {
-  console.log("Delete item with ID:", id);
 
-  fetch(`http://localhost:8080/delete/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to delete item");
-      }
-      console.log("Item deleted successfully");
-      // Optionally, you can update the UI or perform any other actions after successful deletion
-    })
-    .catch((error) => {
-      console.error("Error deleting item:", error);
-      // Handle the error (e.g., show an error message to the user)
-    });
-};
 const Data = ({ records }) => {
   const navigate = useNavigate();
 
@@ -168,7 +158,6 @@ const Data = ({ records }) => {
     return null; // or handle this case accordingly
   }
   console.log(records);
-
   return (
     <div>
       <tbody>
@@ -179,12 +168,12 @@ const Data = ({ records }) => {
             <td className="th">{item.employeename}</td>
             <td className="th">{item.cabinetname}</td>
             <td className="th">
-              <button className="Editbtn" onClick={() => navigate("/edit/:id")}>
+              <button
+                className="Editbtn"
+                onClick={() => navigate(`/edit/${item.id}`)}
+              >
                 Edit
               </button>
-              {/* <button className="Editbtn" onClick={handleDelete}>
-                Delete
-              </button> */}
             </td>
           </tr>
         ))}
@@ -194,18 +183,3 @@ const Data = ({ records }) => {
 };
 
 export default Employee;
-
-// useEffect(() => {
-//   fetch("http://localhost:8080/home")
-//   .then((res) => res.json())
-//   .then((result) => {
-//     if (Array.isArray(result.responseDto)) {
-//       setData(result.responseDto);
-//     } else if (typeof result.responseDto === "object") {
-//       setData([result.responseDto]); // Wrap the object inside an array
-//     } else {
-//       console.error("Invalid response format:", result.responseDto);
-//     }
-//   })
-//   .catch((err) => console.log(err));
-// }, []);

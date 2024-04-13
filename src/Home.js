@@ -4,6 +4,7 @@ import CalendarComp from "./CalendarComp";
 import DateRangePickerComp from "./DateRangePickerComp";
 import Excel from "./Excel";
 import Search from "./Search";
+import Pagination from "./Pagination";
 
 function Home() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ console.log(filteredData)
 
        <span className="excel"><Excel data={data} filteredData={filteredData} search={search}/></span> 
          <span className="logout">
-         <button  onClick={() => navigate("/")}>
+         <button className="log" onClick={() => navigate("/")}>
             Logout
           </button>
          </span>
@@ -81,6 +82,7 @@ console.log(filteredData)
           {Array.isArray(data) ? <GetData data={data} search={search}/> : <h2>Loading</h2>}
         </table>
       </div>
+      {/* <Pagination data={data} setData={setData}/> */}
     </div>
   );
 }
@@ -121,15 +123,13 @@ const Data = ({ data }) => {
         <tr key={index} className="tr">
           <td className="th">{item.id}</td>
           <td className="th">{item.employeename}</td>
-
+          
           <td className="th">{item.doornumber}</td>
           <td className="th">{item.cabinetname}</td>
 
           <td className="th">{item.intime}</td>
           <td className="th">{item.dailydate}</td>
-          {/* <td className="th">
-          <button className="Editbtn" onClick={()=>navigate('/edit/:id')}>Edit</button>
-          </td> */}
+       
 
 
         </tr>

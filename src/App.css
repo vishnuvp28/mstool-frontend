@@ -818,7 +818,6 @@ body {
   padding: 15px;
   margin-top: 15px;
   margin-right: 10px;
-
   width: 350px;
   font-size: large;
   border-radius: 20px;
@@ -840,11 +839,11 @@ body {
 
 .tr {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 5px;
   margin: 5px;
   align-items: center;
-  width: 1200px;
+  width: 1400px;
 }
 
 .homediv {
@@ -852,7 +851,6 @@ body {
   flex-direction: row;
   justify-content: flex-end;
   justify-content: flex-end;
-/* border:2px solid red; */
   width: auto;
   height: auto;
   margin-top: 0px;
@@ -869,9 +867,10 @@ body {
 }
 
 .container {
-  justify-content: space-around;
+  justify-content:center;
   display: flex;
   align-items: center;
+  width: auto;
 }
 
 

@@ -16,9 +16,10 @@ function DateRangePickerComp() {
 
   const [open, setOpen] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  const[data,setData]=useState([]);
+  const [data, setData] = useState([]);
   const refOne = useRef(null);
   useEffect(() => {
+    fetchData();
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
@@ -48,7 +49,6 @@ function DateRangePickerComp() {
   //     const formattedEndDate = format(range[0].endDate, "MM/dd/yyyy");
   //     console.log("Formatted Start Date:", formattedStartDate);
   //     console.log("Formatted End Date:", formattedEndDate);
-
 
   //     const response = await axios.post("http://localhost:8080/date", {
   //       startDate: formattedStartDate,
@@ -85,7 +85,7 @@ function DateRangePickerComp() {
   //     console.log(filteredData);
   //   } catch (error) {
   //     console.error("Error fetching data:", error);
-      
+
   //   }
 
   //     console.log(filteredData);
@@ -95,32 +95,53 @@ function DateRangePickerComp() {
   //   setOpen(false); // Close date picker after applying filter
   // };
 
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.post("http://localhost:8080/date"); // Adjust the URL to your backend endpoint
+  //     setData(response.data);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/data"); // Adjust the URL to your backend endpoint
+      const formattedStartDate = format(range[0].startDate, "dd/MM/yyyy");
+      const formattedEndDate = format(range[0].endDate, "dd/MM/yyyy");
+      const response = await axios.post("http://localhost:8080/date", {
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      });
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-
-  
   const handleDateRangeChange = (item) => {
     setRange([item.selection]);
   };
 
-
   const handleFilter = () => {
-    const filtered = data.filter(item => {
+    console.log("Filter button clicked");
+    if (data.length === 0) {
+      console.log("Data is empty. Fetching data...");
+      fetchData();
+      return;
+    }
+
+    const filtered = data.filter((item) => {
       const itemDate = new Date(item.dailydate); // Assuming dailydate is a date string in MM/dd/yyyy format
       return itemDate >= range[0].startDate && itemDate <= range[0].endDate;
     });
     setFilteredData(filtered);
     setOpen(false); // Close date picker after applying filter
   };
-
+  console.log("Data:", data);
+  console.log("Date Range:", range);
+  console.log("Filtered Data:", filteredData);
   return (
     <div className="calenderwrap">
       <h5 className="h3">DD/MM/YYYY </h5>

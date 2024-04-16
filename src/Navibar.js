@@ -8,7 +8,7 @@ function Navibar({data}) {
     <Navbar bg="dark" data-bs-theme="light"className="bg-body-tertiary">
       <Container className="nav">
        <span><img src="https://pbs.twimg.com/profile_images/565412050068066305/j7UD78f__400x400.jpeg"  alt="" className="i"/></span>
-        <Navbar.Brand href="http://localhost:3000/"><b>ENCORE</b> <span>Group</span></Navbar.Brand>
+        <Navbar.Brand ><b>ENCORE</b> <span>Group</span></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         </Navbar.Collapse>

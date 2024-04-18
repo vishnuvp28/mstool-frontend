@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import CalendarComp from "./CalendarComp";
-import DateRangePickerComp from "./DateRangePickerComp";
 import Excel from "./Excel";
-import Search from "./Search";
-import Pagination from "./Pagination";
 import { DateRangePicker } from "react-date-range";
 
 function Home() {
@@ -20,7 +16,6 @@ function Home() {
     setSearch(e.target.value);
   };
 
-  // <CalendarComp />
   useEffect(() => {
     fetch("http://localhost:8080/home")
       .then((res) => res.json())
@@ -62,6 +57,14 @@ function Home() {
     <div className="home">
       <div>
         <div className="homediv">
+        <span className="emp">
+          <button className="em" onClick={() => navigate("/employee")}>
+            Employee
+          </button>
+          <button onClick={() => navigate("/signup")} className="em">
+            SIGNUP
+          </button>
+        </span>
           <br></br>
           <br></br>
           <input
@@ -83,18 +86,14 @@ function Home() {
         </div>
 
         <br></br>
-
-        <span className="emp">
-          <button className="em" onClick={() => navigate("/employee")}>
-            Employee
-          </button>
-          <br></br>
-        </span>
+      
       </div>
       <div>
-        {/* <DateRangePickerComp data={data}/> */}
         <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
-        <button onClick={()=> window.location.reload(false)} >Submit</button>
+        <br></br>
+        <button onClick={() => window.location.reload(false)} className="exp">
+          Get All Data
+        </button>
       </div>
       <br></br>
       <div className="container">
@@ -107,7 +106,6 @@ function Home() {
               <th className="th">CABINET NAME</th>
               <th className="th">IN_TIME</th>
               <th className="th">OUT_TIME</th>
-
               <th className="th">DATE</th>
             </tr>
           </thead>
@@ -119,7 +117,6 @@ function Home() {
           )}
         </table>
       </div>
-      {/* <Pagination data={data} setData={setData}/> */}
     </div>
   );
 }
@@ -149,7 +146,6 @@ const Data = ({ data }) => {
     return null; // or handle this case accordingly
   }
   console.log(data);
-
   return (
     <div>
       <tbody>
@@ -168,6 +164,5 @@ const Data = ({ data }) => {
     </div>
   );
 };
-
 
 export default Home;

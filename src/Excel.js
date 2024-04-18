@@ -4,7 +4,6 @@ import Home from "./Home";
 
 
 function Excel({data}) {
-  // console.log(data)
   if(!data){
     console.error("Data is undefined");
     return;
@@ -14,7 +13,6 @@ function Excel({data}) {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
-    // Generate a download link
     XLSX.writeFile(workbook, "data.xlsx");
   };
   return (

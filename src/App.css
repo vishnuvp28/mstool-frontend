@@ -818,7 +818,7 @@ body {
   padding: 15px;
   margin-top: 15px;
   margin-right: 10px;
-  width: 350px;
+  width: 450px;
   font-size: large;
   border-radius: 20px;
   border: none;
@@ -1118,14 +1118,19 @@ body {
 
 .emp {
   display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
+justify-content: flex-start;
+align-items: flex-start;
+width: 100%;
+  /* border: 2px solid red; */
+ 
 }
 .em {
+  justify-content: flex-start;
   padding: 12px;
   width: 120px;
-  margin-right: 55px;
-  /* margin-top: 10px; */
+  margin-left: 30px;
+
+  margin-top: 20px;
   border-radius: 5px;
  background-color: rgb(0, 0, 0);
  color: aliceblue;
@@ -1266,3 +1271,29 @@ body {
 
   }
 
+/* .sign{
+  display: flex;
+  justify-content: flex-end;
+  border:2px solid red;
+  width: auto;
+} */
+
+/* .emp {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 40px;
+}
+.em {
+  padding: 12px;
+  width: 120px;
+  margin-right: 55px;
+  /* margin-top: 10px; */
+  /* border-radius: 5px;
+ background-color: rgb(0, 0, 0);
+ color: aliceblue;
+ border: 0.5px solid white;
+} */
+
+/* .em:hover {
+  background: rgb(74, 74, 74);
+} */ 

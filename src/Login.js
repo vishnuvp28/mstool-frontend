@@ -25,7 +25,7 @@ function Login() {
           },
           body: JSON.stringify(values),
         });
-        if (data.status==="failed login") {
+        if (data.status === "failed login") {
           console.log("error");
           setFormState("error");
           alert("Invalid credentials");
@@ -33,7 +33,7 @@ function Login() {
           setFormState("success");
           alert("LoginSuccessful");
           navigate("/home");
-          console.log("success")
+          console.log("success");
         }
       },
     });
@@ -43,10 +43,6 @@ function Login() {
       <br></br>
 
       <div className="regi">
-        {/* <img className="img" src="https://as1.ftcdn.net/v2/jpg/01/77/26/48/1000_F_177264823_kGXpCq5Ln3kSh0Vg35aQvAJGh9bXAI9k.jpg" alt=""/> */}
-        {/* <img className="img" src="https://as1.ftcdn.net/v2/jpg/07/10/39/04/1000_F_710390477_7hah8IKLt3FeUp7Q1VYS3wJJdK9aKozP.jpg" alt=""/> */}
-        {/* https://t4.ftcdn.net/jpg/01/19/11/55/360_F_119115529_mEnw3lGpLdlDkfLgRcVSbFRuVl6sMDty.jpg */}
-
         <div className="reg">
           <h1 className="h1">LOGIN</h1>
           <form onSubmit={handleSubmit} className="login-form">
@@ -81,9 +77,6 @@ function Login() {
                 LOGIN
               </button>
               <br></br>
-              <button onClick={() => navigate("/signup")} className="butn">
-                New User? SIGNUP
-              </button>
             </>
           </form>
         </div>

@@ -33,10 +33,10 @@ function Register() {
         });
         if (data.status === 400) {
           alert("Username already exist(Redirecting to login page)");
-          navigate("/");
+          navigate("/home");
         } else {
           alert("User added successfully");
-          navigate("/");
+          navigate("/home");
         }
       },
     });
@@ -45,14 +45,10 @@ function Register() {
       <br></br>
 
       <div className="regi">
-        {/* <img className="img" src="https://as1.ftcdn.net/v2/jpg/01/77/26/48/1000_F_177264823_kGXpCq5Ln3kSh0Vg35aQvAJGh9bXAI9k.jpg" alt=""/> */}
-        {/* <img className="img" src="https://as1.ftcdn.net/v2/jpg/07/10/39/04/1000_F_710390477_7hah8IKLt3FeUp7Q1VYS3wJJdK9aKozP.jpg" alt=""/> */}
-        {/* https://t4.ftcdn.net/jpg/01/19/11/55/360_F_119115529_mEnw3lGpLdlDkfLgRcVSbFRuVl6sMDty.jpg */}
 
         <div className="reg">
           <h1 className="h1">SIGN UP</h1>
           <form onSubmit={handleSubmit} className="login-form">
-            {/* <div className="login-form-container"> */}
             <input
               className="textfield"
               placeholder="USERNAME"
@@ -98,10 +94,9 @@ function Register() {
               Sign up
             </button>
             <br></br>
-            <button className="butn" onClick={() => navigate("/")}>
-              Already have an account? LOGIN
+            <button className="butn" onClick={() => navigate("/home")}>
+              Back
             </button>
-            {/* </div> */}
           </form>
         </div>
       </div>

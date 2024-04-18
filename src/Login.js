@@ -82,7 +82,6 @@ function Login() {
         </div>
       </div>
       <span>
-        {/* <link href="http://localhost:3000/login">Already an user ? Login</link> */}
       </span>
     </div>
   );

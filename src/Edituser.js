@@ -8,7 +8,7 @@ const EditUser = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:8080/employee")
+    fetch(`http://localhost:8080/edit/${id}`)
       .then((res) => res.json())
       .then((result) => usetState(result.responseDto))
       .catch((err)=> console.log(err))

@@ -35,13 +35,13 @@ function Employee() {
     fetch("http://localhost:8080/employee")
       .then((res) => res.json())
       .then((result) => {
-        if (Array.isArray(result)) {
+        if (Array.isArray(result.responseDto)) {
           setEmp(result.responseDto);
-          console.log();
-        } else if (typeof result === "object") {
+          console.log(result.responseDto);
+        } else if (typeof result.responseDto === "object") {
           setEmp(result.responseDto);
         } else {
-          console.error("Invalid response format:", result);
+          console.error("Invalid response format:", result.responseDto);
         }
       })
       .catch((err) => console.log(err));

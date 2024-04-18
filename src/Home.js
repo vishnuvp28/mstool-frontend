@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Excel from "./Excel";
 import { DateRangePicker } from "react-date-range";
+// import CalendarComp from "./CalendarComp";
+import DateRangePickerComp from "./DateRangePickerComp";
 
 function Home() {
   const navigate = useNavigate();
@@ -62,7 +64,7 @@ function Home() {
             Employee
           </button>
           <button onClick={() => navigate("/signup")} className="em">
-            SIGNUP
+            Sign Up
           </button>
         </span>
           <br></br>

@@ -60,6 +60,8 @@ function Employee() {
             className="search"
             placeholder="Search"
             onChange={handleChange}
+            style={{color:"white", fontSize:"x-large", backdropFilter:"blur(30px)"}}
+
           ></input>
           <br></br>
           <button className="add" onClick={() => navigate("/add")}>
@@ -138,10 +140,12 @@ const GetData = ({ records, search }) => {
   return (
     <tbody>
       {records
-        .filter((item) => {
-          return search.toLowerCase() === ""
-            ? item
-            : item.employeename.toLowerCase().includes(search);
+         .filter((item) => {
+          return search.trim() === "" ||
+            item.employeename.toLowerCase().includes(search.toLowerCase()) ||
+            (item.employeeid && item.employeeid.toString().includes(search)) || // Check if doornumber is defined before accessing toString method
+            (item.id && item.id.toString().includes(search));
+            (item.cabinetname && item.cabinetname.toString().includes(search)); // Check if id is defined before accessing toString method
         })
         .map((item, index) => (
           <Data records={[item]} key={index} />

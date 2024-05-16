@@ -17,23 +17,45 @@ function Login() {
       initialValues: { username: "", password: "" },
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
-        console.log(values);
-        const data = await fetch("http://localhost:8080/", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
-        if (data.status === "failed login") {
-          console.log("error");
+        try {
+          const response = await fetch("http://localhost:8080/", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({ username: values.username, password: values.password })
+          });
+      
+          if (!response.ok) {
+            throw new Error("Failed to login");
+          }
+      
+          const data = await response.json();
+          console.log(data);
+      
+          if (data.status === "failed login") {
+            console.log("error");
+            setFormState("error");
+            alert("User not found");
+          } else if (data.status ===null) {
+            console.log("error");
+            setFormState("error");
+            alert("Invalid Credential");
+          } else if (data.status === "Successfull login") {
+            setFormState("success");
+            alert("LoginSuccessful");
+            navigate("/home");
+            console.log("success");
+            console.log(data.status);
+          } else {
+            // Handle unexpected response status
+            console.log("Unexpected response status:", data.status);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          // Handle fetch error
           setFormState("error");
-          alert("Invalid credentials");
-        } else {
-          setFormState("success");
-          alert("LoginSuccessful");
-          navigate("/home");
-          console.log("success");
+          alert("An error occurred while logging in");
         }
       },
     });
@@ -45,7 +67,7 @@ function Login() {
       <div className="regi">
         <div className="reg">
           <h1 className="h1">LOGIN</h1>
-          <form onSubmit={handleSubmit} className="login-form">
+          <form onSubmit={handleSubmit} className = "login-form">
             <input
               className="textfield"
               placeholder="USERNAME"
@@ -57,9 +79,9 @@ function Login() {
               error={touched.username && errors.username}
               autoComplete="username"
             />
-            <br></br>
-            <br></br>
-            <input
+             <br></br>
+             <br></br>
+              <input
               className="textfield"
               placeholder="PASSWORD"
               type="password"
@@ -69,9 +91,9 @@ function Login() {
               onChange={handleChange}
               error={touched.password && errors.password}
               autocomplete="current-password"
-            />{" "}
-            <br></br>
-            <br></br>
+              />{" "}
+             <br></br>
+             <br></br>
             <>
               <button type="submit" className="butn">
                 LOGIN

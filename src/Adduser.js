@@ -49,19 +49,7 @@ function Adduser() {
 <br></br>
 
         <form onSubmit={handleSubmit} className="login-form">
-            {/* <input
-              className="textfield"
-              placeholder="Id"
-              type="number"
-              name="id"
-              value={values.id}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.id && errors.id}
-              autoComplete="id"
-            />
-            <br></br>
-            <br></br> */}
+
             <input
               className="textfield"
               placeholder="EmployeeId"

@@ -8,7 +8,6 @@ import Home from "./Home";
 import Employee from "./Employee";
 import Adduser from "./Adduser";
 import EditUser from "./Edituser";
-// import DateRange from "./DateRange";
 function App() {
   return (
     <div className="App">
@@ -23,7 +22,6 @@ function App() {
         <Route path="/employee" element={<Employee/>}/>
 
       </Routes>
-      {/* <Footer/> */}
     </div>
   );
 }

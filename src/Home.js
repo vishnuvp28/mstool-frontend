@@ -72,7 +72,7 @@ function Home() {
           <input
             className="search"
             placeholder="Search"
-            onChange={handleChange}
+            style={{color:"white", fontSize:"x-large", backdropFilter:"blur(30px)"}}            onChange={handleChange}
           ></input>
 
           <span className="excel">
@@ -106,9 +106,10 @@ function Home() {
               <th className="th">NAME</th>
               <th className="th">DOOR NUMBER</th>
               <th className="th">CABINET NAME</th>
-              <th className="th">IN_TIME</th>
-              <th className="th">OUT_TIME</th>
               <th className="th">DATE</th>
+              <th className="th">TIME</th>
+              <th className="th">OPEN/CLOSE</th>
+             
             </tr>
           </thead>
 
@@ -128,11 +129,13 @@ const GetData = ({ data, search }) => {
   return (
     <tbody>
       {data
-        .filter((item) => {
-          return search.toLowerCase() === ""
-            ? item
-            : item.employeename.toLowerCase().includes(search);
-        })
+       .filter((item) => {
+        const employeeName = item.employeename || ""; // Set employeename to an empty string if it's null
+        return (
+          search.trim() === "" ||
+          employeeName.toLowerCase().includes(search.toLowerCase())
+        );
+      })
         .map((item, index) => (
           <Data data={[item]} key={index} />
         ))}
@@ -157,9 +160,9 @@ const Data = ({ data }) => {
             <td className="th">{item.employeename}</td>
             <td className="th">{item.doornumber}</td>
             <td className="th">{item.cabinetname}</td>
+            <td className="th">{item.dailydate}</td>
             <td className="th">{item.intime}</td>
             <td className="th">{item.outtime}</td>
-            <td className="th">{item.dailydate}</td>
           </tr>
         ))}
       </tbody>

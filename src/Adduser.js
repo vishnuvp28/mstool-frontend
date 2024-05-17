@@ -4,9 +4,9 @@ import * as yup from "yup";
 import { useNavigate } from "react-router";
 
 const formValidationSchema = yup.object({
-  employeeid: yup.string().required(),
+  field1: yup.string().required(),
   employeename: yup.string().required(),
-  cabinetname: yup.string().required(),
+  field3: yup.string().required(),
 
 });
 
@@ -16,7 +16,7 @@ function Adduser() {
 
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
     useFormik({
-      initialValues: {  employeeid:"", employeename: "",cabinetname:"" },
+      initialValues: {  field1:"", employeename: "",field3:"" },
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
         console.log(values);
@@ -54,12 +54,12 @@ function Adduser() {
               className="textfield"
               placeholder="EmployeeId"
               type="number"
-              name="employeeid"
-              value={values.employeeid}
+              name="field1"
+              value={values.field1}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.employeeid && errors.employeeid}
-              autoComplete="employeeid"
+              error={touched.field1 && errors.field1}
+              autoComplete="field1"
             />
             <br></br>
             <br></br>
@@ -80,12 +80,12 @@ function Adduser() {
               className="textfield"
               placeholder="Cabinet Name"
               type="text"
-              name="cabinetname"
-              value={values.cabinetname}
+              name="field3"
+              value={values.field3}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.cabinetname && errors.cabinetname}
-              autoComplete="cabinetname"
+              error={touched.field3 && errors.field3}
+              autoComplete="field3"
             />
             <br></br>
             <br></br>

@@ -59,6 +59,7 @@ function Register() {
               onBlur={handleBlur}
               error={touched.username && errors.username}
               autoComplete="username"
+              style={{color:"white", backdropFilter:"blur(20px)"}}
             />
             <br></br>
             <br></br>
@@ -72,6 +73,7 @@ function Register() {
               onBlur={handleBlur}
               error={touched.email && errors.email}
               autoComplete="email" 
+              style={{color:"white", backdropFilter:"blur(20px)"}}
             />
             <br></br>
             <br></br>
@@ -86,15 +88,18 @@ function Register() {
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete="current-password"
+              style={{color:"white", backdropFilter:"blur(20px)"}}
             />
             <br></br>
             <br></br>
 
-            <button className="butn" type="submit">
+            <button className="butn" type="submit"  style={{color:"white", backdropFilter:"blur(20px)"}}
+>
               Sign up
             </button>
             <br></br>
-            <button className="butn" onClick={() => navigate("/home")}>
+            <button className="butn" onClick={() => navigate("/home")} style={{color:"white", backdropFilter:"blur(20px)"}}
+>
               Back
             </button>
           </form>

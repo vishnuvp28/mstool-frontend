@@ -78,6 +78,8 @@ function Login() {
               onBlur={handleBlur}
               error={touched.username && errors.username}
               autoComplete="username"
+              style={{color:"white", backdropFilter:"blur(20px)"}}
+
             />
              <br></br>
              <br></br>
@@ -91,11 +93,14 @@ function Login() {
               onChange={handleChange}
               error={touched.password && errors.password}
               autocomplete="current-password"
+              style={{color:"white", backdropFilter:"blur(20px)"}}
+
               />{" "}
              <br></br>
              <br></br>
             <>
-              <button type="submit" className="butn">
+              <button type="submit" className="butn" style={{color:"white", backdropFilter:"blur(20px)"}}
+>
                 LOGIN
               </button>
               <br></br>

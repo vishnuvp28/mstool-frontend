@@ -94,6 +94,7 @@ function Employee() {
         </table>
       </div>
       <br></br>
+      {/* Paginaton---------------------------------- */}
 
       <div className="nav">
         <nav>
@@ -143,9 +144,8 @@ const GetData = ({ records, search }) => {
          .filter((item) => {
           return search.trim() === "" ||
             item.employeename.toLowerCase().includes(search.toLowerCase()) ||
-            (item.employeeid && item.employeeid.toString().includes(search)) || // Check if doornumber is defined before accessing toString method
-            (item.id && item.id.toString().includes(search));
-            (item.cabinetname && item.cabinetname.toString().includes(search)); // Check if id is defined before accessing toString method
+            (item.field1 && item.field1.toString().includes(search))  
+            
         })
         .map((item, index) => (
           <Data records={[item]} key={index} />
@@ -157,7 +157,7 @@ const GetData = ({ records, search }) => {
 const Data = ({ records }) => {
   const navigate = useNavigate();
 
-  if (!Array.isArray(records)) {
+  if (!Array.isArray(records|| records.length=== 0)) {
     console.error("Data is not an array:", records);
     return null; // or handle this case accordingly
   }
@@ -168,9 +168,9 @@ const Data = ({ records }) => {
         {records.map((item, index) => (
           <tr key={index} className="tr">
             <td className="th">{item.id}</td>
-            <td className="th">{item.employeeid}</td>
+            <td className="th">{item.field1}</td>
             <td className="th">{item.employeename}</td>
-            <td className="th">{item.cabinetname}</td>
+            <td className="th">{item.field3}</td>
             <td className="th">
               <button
                 className="Editbtn"

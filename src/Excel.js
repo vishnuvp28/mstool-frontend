@@ -5,14 +5,13 @@ import Home from "./Home";
 
 function Excel({data}) {
   if(!data){
-    console.error("Data is undefined");
-    return;
+    console.error("Data is undefined", data);
+    return null;
   }
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
-
+    XLSX.utils.book_append_sheet(workbook, worksheet, "records");
     XLSX.writeFile(workbook, "data.xlsx");
   };
   return (

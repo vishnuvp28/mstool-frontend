@@ -14,6 +14,47 @@ function Home() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const [think, setThink] = useState(null);
+
+  const fetchData = async() => {
+    await fetch("http://localhost:8080/thinks")
+      .then((res) => res.json())
+      .then((result) => {
+        if (Array.isArray(result.responseDto)) {
+          setThink(result.responseDto);
+          window.location.reload(false)
+        } else if (typeof result.responseDto === "object") {
+          setThink([result.responseDto]);
+          window.location.reload(false)
+        } else {
+          console.error("Invalid response format:", result.responseDto);
+          window.location.reload(false)
+        }
+        
+      }
+    ) 
+      .catch((err) => console.log(err));
+  };
+ 
+
+  const totalRecords = data ? data.length : 0;
+  // console.log(data)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(40);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords =data ? data.slice(indexOfFirstRecord, indexOfLastRecord) : [];
+
+  // // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -24,11 +65,11 @@ function Home() {
       .then((result) => {
         if (Array.isArray(result.responseDto)) {
           setData(result.responseDto);
+          
           setAlldata(result.responseDto);
         } else if (typeof result.responseDto === "object") {
           setData([result.responseDto]);
           setAlldata([result.responseDto]);
-          // Wrap the object inside an array
         } else {
           console.error("Invalid response format:", result.responseDto);
         }
@@ -76,26 +117,32 @@ function Home() {
           ></input>
 
           <span className="excel">
-            <Excel data={data} filteredData={filteredData} search={search} />
+            <Excel records={currentRecords} data={data} filteredData={filteredData} search={search} />
           </span>
           <span className="logout">
             <button className="log" onClick={() => navigate("/")}>
               Logout
             </button>
+            
           </span>
+        
           <br></br>
           <br></br>
+        <span>
+          <button onClick={fetchData} className="exp1">
+            Refresh
+          </button>
+        </span>
         </div>
-
         <br></br>
-      
       </div>
       <div>
         <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
         <br></br>
-        <button onClick={() => window.location.reload(false)} className="exp">
+        {/* <button onClick={() => window.location.reload(false)} 
+         className="exp">
           Get All Data
-        </button>
+        </button> */}
       </div>
       <br></br>
       <div className="container">
@@ -113,56 +160,94 @@ function Home() {
             </tr>
           </thead>
 
-          {Array.isArray(data) ? (
-            <GetData data={data} search={search} />
+          {data && Array.isArray(data) ? (
+            <GetData records={currentRecords} data={data} search={search} />
           ) : (
             <h2>Loading</h2>
           )}
         </table>
       </div>
+
+      <br></br>
+      <div className="nav">
+        <nav>
+          <ul className="pagination">
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={prevPage}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
+            </li>
+            {pageNumbers.map((number) => (
+              <li key={number} className="page-item">
+                <button onClick={() => paginate(number)} className="page-link">
+                  {number}
+                </button>
+              </li>
+            ))}
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={nextPage}
+                disabled={
+                  currentPage === Math.ceil(totalRecords / recordsPerPage)
+                }
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }
 
-const GetData = ({ data, search }) => {
-  console.log(data);
+const GetData = ({ data, search,records }) => {
+  console.log(records);
   return (
     <tbody>
-      {data
+      {records 
        .filter((item) => {
-        const employeeName = item.employeename || ""; // Set employeename to an empty string if it's null
+        const employeeName = item.employeename || "".toString(); 
         return (
           search.trim() === "" ||
-          employeeName.toLowerCase().includes(search.toLowerCase())
+          employeeName.toLowerCase().includes(search.toLowerCase()) ||
+          (item.employeeid && item.employeeid.toString().includes(search)) ||
+          (item.cabinetname && item.cabinetname.toString().toLowerCase().includes(search))
         );
+      
       })
         .map((item, index) => (
-          <Data data={[item]} key={index} />
+          <Data records={[item]} key={index} />
         ))}
     </tbody>
   );
 };
 
-const Data = ({ data }) => {
+const Data = ({ records }) => {
   const navigate = useNavigate();
 
-  if (!Array.isArray(data)) {
-    console.error("Data is not an array:", data);
-    return null; // or handle this case accordingly
+  if (!Array.isArray(records) || records.length=== 0) {
+    console.error("Data is not an array or is empty:", records);
+    return null; 
   }
-  console.log(data);
+  console.log(records);
   return (
     <div>
       <tbody>
-        {data.map((item, index) => (
+        {records.map((item, index) => (
           <tr key={index} className="tr">
             <td className="th">{item.id}</td>
             <td className="th">{item.employeename}</td>
-            <td className="th">{item.doornumber}</td>
+            <td className="th">{item.field2}</td>
             <td className="th">{item.cabinetname}</td>
             <td className="th">{item.dailydate}</td>
             <td className="th">{item.intime}</td>
-            <td className="th">{item.outtime}</td>
+            <td className="th">{item.openclose}</td>
           </tr>
         ))}
       </tbody>

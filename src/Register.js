@@ -92,10 +92,11 @@ function Register() {
             />
             <br></br>
             <br></br>
-
-            <button className="butn" type="submit"  style={{color:"white", backdropFilter:"blur(20px)"}}
+  
+            <button className="butn" type="submit" onClick={() => navigate("/")} style={{color:"white", backdropFilter:"blur(20px)"}}
 >
               Sign up
+            
             </button>
             <br></br>
             <button className="butn" onClick={() => navigate("/home")} style={{color:"white", backdropFilter:"blur(20px)"}}

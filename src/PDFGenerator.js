@@ -1,21 +1,39 @@
-import { Home } from '@mui/icons-material';
-import React, { useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
+import React from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const PDFGenerator = ({ data }) => {
-  const componentRef = useRef();
+  const generatePDF = () => {
+    const doc = new jsPDF();
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+    // Add a title to the PDF
+    doc.text("Employee Data", 20, 10);
+
+    // Prepare table content
+    const tableColumn = ["ID", "NAME", "DOOR NUMBER", "CABINET NAME", "DATE", "TIME", "OPEN/CLOSE"];
+    const tableRows = data.map((item) => [
+      item.id,
+      item.employeename,
+      item.field2,
+      item.cabinetname,
+      item.dailydate,
+      item.intime,
+      item.openclose,
+    ]);
+
+    // Add table to the PDF
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    });
+
+    // Save the PDF
+    doc.save("employee_data.pdf");
+  };
 
   return (
-    <div>
-      <button className="bttn" onClick={handlePrint}>Download PDF</button>
-      <div style={{ display: 'none' }}>
-        <Home ref={componentRef} data={data} />
-      </div>
-    </div>
+    <button className="pdf" onClick={generatePDF}>Download PDF</button>
   );
 };
 

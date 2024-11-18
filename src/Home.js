@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Excel from "./Excel";
+import { useState, CSSProperties } from "react";
 import { DateRangePicker } from "react-date-range";
 // import CalendarComp from "./CalendarComp";
 import DateRangePickerComp from "./DateRangePickerComp";
+import PDFGenerator from "./PDFGenerator";
+import { ClipLoader } from "react-spinners";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  border: "5px solid white",
+ 
+};
 
 function Home() {
   const navigate = useNavigate();
@@ -13,10 +23,11 @@ function Home() {
   const [alldata, setAlldata] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [loading, setLoading] = useState(false);
   const [think, setThink] = useState(null);
 
   const fetchData = async() => {
+    setLoading(true);
     await fetch("http://localhost:8080/thinks")
       .then((res) => res.json())
       .then((result) => {
@@ -33,14 +44,17 @@ function Home() {
         
       }
     ) 
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setLoading(false);
+      });
   };
  
 
   const totalRecords = data ? data.length : 0;
   // console.log(data)
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(40);
+  const [recordsPerPage] = useState(200);
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
@@ -120,31 +134,40 @@ function Home() {
             <Excel records={currentRecords} data={data} filteredData={filteredData} search={search} />
           </span>
           <span className="logout">
+            <PDFGenerator  data={data} />
+          </span>
+          <span className="logout">
             <button className="log" onClick={() => navigate("/")}>
               Logout
             </button>
-            
           </span>
-        
           <br></br>
           <br></br>
-        <span>
-          <button onClick={fetchData} className="exp1">
-            Refresh
-          </button>
-        </span>
+          <span>
+            <button onClick={fetchData} className="exp1">
+              Refresh
+            </button>
+          </span>
         </div>
         <br></br>
-      </div>
-      <div>
-        <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+
+        {loading && (
+          <div className="loading-spinner">
+            <ClipLoader
+              loading={loading}
+              cssOverride={override}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        )}
+        
+        <div>
+          <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+          <br></br>
+        </div>
         <br></br>
-        {/* <button onClick={() => window.location.reload(false)} 
-         className="exp">
-          Get All Data
-        </button> */}
-      </div>
-      <br></br>
       <div className="container">
         <table border="3" className="table">
           <thead className="thead">
@@ -202,6 +225,20 @@ function Home() {
           </ul>
         </nav>
       </div>
+      {loading && (
+        <div className="loading-spinner">
+
+          <ClipLoader         
+        
+        loading={loading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader" />
+        </div>
+
+      )}
+    </div>
     </div>
   );
 }
@@ -212,7 +249,7 @@ const GetData = ({ data, search,records }) => {
     <tbody>
       {records 
        .filter((item) => {
-        const employeeName = item.employeename || "".toString(); 
+        const employeeName = item.employeename || "".toString();
         return (
           search.trim() === "" ||
           employeeName.toLowerCase().includes(search.toLowerCase()) ||
@@ -243,10 +280,10 @@ const Data = ({ records }) => {
           <tr key={index} className="tr">
             <td className="th">{item.id}</td>
             <td className="th">{item.employeename}</td>
-            <td className="th">{item.field2}</td>
+            <td className="th">{item.doornumber}</td>
             <td className="th">{item.cabinetname}</td>
             <td className="th">{item.dailydate}</td>
-            <td className="th">{item.intime}</td>
+            <td className="th">{item.time}</td>
             <td className="th">{item.openclose}</td>
           </tr>
         ))}

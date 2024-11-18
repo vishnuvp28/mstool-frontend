@@ -71,7 +71,19 @@ console.log(array);
               <h1 className="h1">Edit</h1>
               <br></br>
               <form onSubmit={handleSubmit} className="login-form">
-
+              <input
+               className="textfield"
+               placeholder=" Employee Id"
+               type="number"
+               name="field1"
+               value={values.field1}
+               onChange={handleChange}
+               onBlur={handleBlur}
+               error={touched.field1 && errors.field1}
+               autoComplete="field1"
+            />{" "}
+            <br></br>
+            <br></br>
             <input
                className="textfield"
                placeholder="Name"
@@ -82,6 +94,19 @@ console.log(array);
                onBlur={handleBlur}
                error={touched.employeename && errors.employeename}
                autoComplete="employeename"
+            />{" "}
+            <br></br>
+            <br></br>
+            <input
+               className="textfield"
+               placeholder="Cabinet Name"
+               type="text"
+               name="field3"
+               value={values.field3}
+               onChange={handleChange}
+               onBlur={handleBlur}
+               error={touched.field3 && errors.field3}
+               autoComplete="field3"
             />{" "}
             <br></br>
             <br></br>

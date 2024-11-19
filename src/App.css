@@ -3,6 +3,7 @@
   height: 109vh;
 }
 
+
 body {
   justify-content: center;
   background: linear-gradient(
@@ -1301,13 +1302,27 @@ width: 100%;
   justify-content: center;
   overflow-x: auto;
 }
-.pagination {
+/* .pagination {
   display: flex;
   list-style: none;
   padding: 0;
 }
 .page-item {
   margin: 0 5px;
+} */
+.pagination {
+  display: flex;
+  flex-wrap: wrap; /* Wrap buttons to the next line if needed */
+  justify-content: center; /* Center pagination */
+}
+
+.page-item {
+  margin: 0 5px; /* Add spacing between buttons */
+}
+
+.page-item .active {
+  background-color: #27ae60; /* Highlight active page */
+  color: white;
 }
 .page-link {
   padding: 10px;

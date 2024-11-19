@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import Excel from "./Excel";
 import { useState, CSSProperties } from "react";
 import { DateRangePicker } from "react-date-range";
-// import CalendarComp from "./CalendarComp";
 import DateRangePickerComp from "./DateRangePickerComp";
 import PDFGenerator from "./PDFGenerator";
 import { ClipLoader } from "react-spinners";
@@ -17,7 +16,7 @@ const override: CSSProperties = {
 
 function Home() {
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState(null);
   const [alldata, setAlldata] = useState([]);
@@ -53,8 +52,11 @@ function Home() {
 
   const totalRecords = data ? data.length : 0;
   // console.log(data)
+ 
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(200);
+  const [recordsPerPage] = useState(1);
+  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+  const maxVisibleButtons = 5;
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
@@ -62,12 +64,22 @@ function Home() {
   }
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords =data ? data.slice(indexOfFirstRecord, indexOfLastRecord) : [];
+  const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  // // Change page
+  const getVisiblePageNumbers = () => {
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+    if (endPage - startPage + 1 < maxVisibleButtons) {
+      startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  };
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
+  const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -127,14 +139,19 @@ function Home() {
           <input
             className="search"
             placeholder="Search"
-            style={{color:"white", fontSize:"x-large", backdropFilter:"blur(30px)"}}            onChange={handleChange}
+            style={{color:"white", fontSize:"x-large", backdropFilter:"blur(30px)"}}           
+             onChange={handleChange}
           ></input>
 
           <span className="excel">
             <Excel records={currentRecords} data={data} filteredData={filteredData} search={search} />
           </span>
           <span className="logout">
-            <PDFGenerator  data={data} />
+          <PDFGenerator
+  data={data}
+  filteredData={filteredData}
+  search={search}
+/>
           </span>
           <span className="logout">
             <button className="log" onClick={() => navigate("/")}>
@@ -189,6 +206,8 @@ function Home() {
             <h2>Loading</h2>
           )}
         </table>
+
+
       </div>
 
       <br></br>
@@ -203,25 +222,26 @@ function Home() {
               >
                 Prev
               </button>
-            </li>
-            {pageNumbers.map((number) => (
-              <li key={number} className="page-item">
-                <button onClick={() => paginate(number)} className="page-link">
-                  {number}
-                </button>
               </li>
+{pageNumbers.map((number) => (
+  <li key={number} className="page-item">
+    <button
+      onClick={() => setCurrentPage(number)}
+      className={`page-link ${currentPage === number ? "active" : ""}`}
+    >
+      {number}
+    </button>
+  </li>
             ))}
-            <li className="page-item">
-              <button
-                className="page-link"
-                onClick={nextPage}
-                disabled={
-                  currentPage === Math.ceil(totalRecords / recordsPerPage)
-                }
-              >
-                Next
-              </button>
-            </li>
+           <li className="page-item">
+  <button
+    className="page-link"
+    onClick={nextPage}
+    disabled={currentPage === Math.ceil(totalRecords / recordsPerPage)}
+  >
+    Next
+  </button>
+</li>
           </ul>
         </nav>
       </div>

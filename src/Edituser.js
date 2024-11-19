@@ -100,7 +100,7 @@ console.log(array);
             <input
                className="textfield"
                placeholder="Cabinet Name"
-               type="text"
+               type="number"
                name="field3"
                value={values.field3}
                onChange={handleChange}
@@ -117,8 +117,8 @@ console.log(array);
               </button>
               <br></br>
               <button  className="addbtn" onClick={()=>navigate("/employee")}>
-                Back
-              </button>
+                Back 
+              </button>  
             </>
           </form>
             </div>

@@ -8,25 +8,34 @@ function Employee() {
   const { id } = useParams();
   const [emp, setEmp] = useState([]);
   const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(20);
 
   const totalRecords = emp.length;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(11);
+  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+  const maxVisibleButtons = 5;
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
-    pageNumbers.push(i);
-  }
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = emp.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  // // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
 
+  const getVisiblePageNumbers = () => {
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+  
+    if (endPage - startPage + 1 < maxVisibleButtons) {
+      startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+  
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  };
+  
+  
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -46,7 +55,7 @@ function Employee() {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(filteredData);
+  // console.log(filteredData);
 
 
   return (
@@ -97,38 +106,36 @@ function Employee() {
       {/* Paginaton---------------------------------- */}
 
       <div className="nav">
-        <nav>
-          <ul className="pagination">
-            <li className="page-item">
-              <button
-                className="page-link"
-                onClick={prevPage}
-                disabled={currentPage === 1}
-              >
-                Prev
-              </button>
-            </li>
-            {pageNumbers.map((number) => (
-              <li key={number} className="page-item">
-                <button onClick={() => paginate(number)} className="page-link">
-                  {number}
-                </button>
-              </li>
-            ))}
-            <li className="page-item">
-              <button
-                className="page-link"
-                onClick={nextPage}
-                disabled={
-                  currentPage === Math.ceil(totalRecords / recordsPerPage)
-                }
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+  <nav>
+    <ul className="pagination">
+      <li className="page-item">
+        <button
+          className="page-link"
+          onClick={prevPage}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+      </li>
+      {getVisiblePageNumbers().map((number) => (
+        <li key={number} className={`page-item ${number === currentPage ? 'active' : ''}`}>
+          <button onClick={() => paginate(number)} className="page-link">
+            {number}
+          </button>
+        </li>
+      ))}
+      <li className="page-item">
+        <button
+          className="page-link"
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
     </div>
   );
 }
@@ -159,7 +166,7 @@ const Data = ({ records }) => {
 
   if (!Array.isArray(records|| records.length=== 0)) {
     console.error("Data is not an array:", records);
-    return null; // or handle this case accordingly
+    return null; 
   }
   console.log(records);
   return (

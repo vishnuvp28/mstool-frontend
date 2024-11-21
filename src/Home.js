@@ -35,10 +35,10 @@ function Home() {
           window.location.reload(false)
         } else if (typeof result.responseDto === "object") {
           setThink([result.responseDto]);
-          window.location.reload(false)
+          // window.location.reload(false)
         } else {
           console.error("Invalid response format:", result.responseDto);
-          window.location.reload(false)
+          // window.location.reload(false)
         }
         
       }
@@ -48,23 +48,45 @@ function Home() {
         setLoading(false);
       });
   };
- 
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearch(query);
+    const results = data.filter((item) => {
+      const employeeName = item.employeename || "";
+      return (
+        employeeName.toLowerCase().includes(query) ||
+        (item.employeeid && item.employeeid.toString().includes(query)) ||
+        (item.cabinetname &&
+          item.cabinetname.toString().toLowerCase().includes(query))
+      );
+    });
+    setFilteredData(results);
+    setCurrentPage(1);
+  };
 
   const totalRecords = data ? data.length : 0;
   // console.log(data)
  
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(1);
-  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+  const [recordsPerPage] = useState(30);
+  const totalPages = Math.ceil(filteredData / recordsPerPage);
   const maxVisibleButtons = 5;
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalRecords / recordsPerPage); i++) {
     pageNumbers.push(i);
   }
+  
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = filteredData.slice(indexOfFirstRecord, indexOfLastRecord);
+
+
+  const changePage = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    fetchData();
+  }, []); 
 
   const getVisiblePageNumbers = () => {
     let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
@@ -76,6 +98,7 @@ function Home() {
 
     return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   };
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -122,6 +145,8 @@ function Home() {
     endDate: endDate,
     key: "selection",
   };
+
+  const slicedData = data && data.slice ? data.slice(0, 10) : [];
   return (
     <div className="home">
       <div>
@@ -140,7 +165,9 @@ function Home() {
             className="search"
             placeholder="Search"
             style={{color:"white", fontSize:"x-large", backdropFilter:"blur(30px)"}}           
-             onChange={handleChange}
+             onChange={handleSearch}
+             
+
           ></input>
 
           <span className="excel">
@@ -152,6 +179,7 @@ function Home() {
   filteredData={filteredData}
   search={search}
 />
+
           </span>
           <span className="logout">
             <button className="log" onClick={() => navigate("/")}>
@@ -167,7 +195,6 @@ function Home() {
           </span>
         </div>
         <br></br>
-
         {loading && (
           <div className="loading-spinner">
             <ClipLoader
@@ -178,11 +205,18 @@ function Home() {
               data-testid="loader"
             />
           </div>
+        
+
         )}
         
         <div>
           <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
           <br></br>
+          <ul>
+    {slicedData.map((item, index) => (
+      <li key={index}>{item.name || `Item ${index + 1}`}</li>
+    ))}
+  </ul>
         </div>
         <br></br>
       <div className="container">
@@ -212,38 +246,54 @@ function Home() {
 
       <br></br>
       <div className="nav">
-        <nav>
-          <ul className="pagination">
-            <li className="page-item">
-              <button
-                className="page-link"
-                onClick={prevPage}
-                disabled={currentPage === 1}
-              >
-                Prev
-              </button>
+      <nav>
+    <ul className="pagination">
+      <li className="page-item">
+        <button
+          className="page-link"
+          onClick={prevPage}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+      </li>
+      {Array.from({ length: totalPages }, (_, i) => i + 1)
+        .filter(
+          (number) =>
+            number === 1 || // Always show the first page
+            number === totalPages || // Always show the last page
+            (number >= currentPage - 2 && number <= currentPage + 2) // Show numbers around the current page
+        )
+        .map((number, index, array) => (
+          <React.Fragment key={number}>
+            {index > 0 && number > array[index - 1] + 1 && (
+              <li className="page-item disabled">
+                <span className="page-link">...</span>
               </li>
-{pageNumbers.map((number) => (
-  <li key={number} className="page-item">
-    <button
-      onClick={() => setCurrentPage(number)}
-      className={`page-link ${currentPage === number ? "active" : ""}`}
-    >
-      {number}
-    </button>
-  </li>
-            ))}
-           <li className="page-item">
-  <button
-    className="page-link"
-    onClick={nextPage}
-    disabled={currentPage === Math.ceil(totalRecords / recordsPerPage)}
-  >
-    Next
-  </button>
-</li>
-          </ul>
-        </nav>
+            )}
+            <li
+              className={`page-item ${number === currentPage ? "active" : ""}`}
+            >
+              <button
+                onClick={() => paginate(number)}
+                className="page-link"
+              >
+                {number}
+              </button>
+            </li>
+          </React.Fragment>
+        ))}
+      <li className="page-item">
+        <button
+          className="page-link"
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
       </div>
       {loading && (
         <div className="loading-spinner">
@@ -263,7 +313,7 @@ function Home() {
   );
 }
 
-const GetData = ({ data, search,records }) => {
+const GetData = ({ data, search,records,setData }) => {
   console.log(records);
   return (
     <tbody>
@@ -284,7 +334,7 @@ const GetData = ({ data, search,records }) => {
     </tbody>
   );
 };
-
+// setData(filteredData);
 const Data = ({ records }) => {
   const navigate = useNavigate();
 

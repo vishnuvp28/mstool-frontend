@@ -27,7 +27,8 @@ function Adduser() {
           },
           body: JSON.stringify(values),
         });
-        if (data.status==="failed login") {
+        console.log(data)
+        if (data.status===400) {
           console.log("error");
           setForm("error");
           alert("Invalid credentials");

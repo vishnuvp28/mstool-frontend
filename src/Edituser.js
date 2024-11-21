@@ -30,11 +30,16 @@ console.log(array);
      
     const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
       useFormik({
-        initialValues: {employeename:"" },
+        initialValues: {   employeename: "",
+          field1: "",
+          field3: "", },
       
         onSubmit: async () => {
           console.log(values.employeename);
-          const datas={...array,employeename:values.employeename}
+          console.log(values.field1);
+          console.log(values.field3);
+
+          const datas={...array,employeename:values.employeename,field1:values.field1,field3:values.field3}
           const datae = await fetch(`http://localhost:8080/edit/${id}`, {
             method: "PUT",
             headers: {
